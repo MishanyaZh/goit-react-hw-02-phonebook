@@ -24,24 +24,23 @@ class App extends Component {
       [number]: value,
       [filter]: value,
     });
-    //   const visibleName = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase)
-    //   );
-    // console.log(visibleName);
     console.log(event.currentTarget.value);
   };
 
-  filter = () => {
-    const visibleName = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(this.state.filter.toLowerCase),
-    );
-    console.log(visibleName);
-  };
+  // filterInput = (event) => {
+  //   const { filter, value } = event.currentTarget;
+  //   this.setState({
+  //     [filter]: value,
+  //   });
+  //   const visibleName = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase)
+  //   );
+  //   console.log(visibleName);
+  // };
 
   handleSubmit = event => {
     event.preventDefault();
     // console.log(this.state.name);
     // this.formSubmitHandler(this.state.name,this.state.number);
-
     this.formSubmitHandler(this.state);
     this.reset();
   };
@@ -69,6 +68,11 @@ class App extends Component {
   };
 
   render() {
+    const normalizedFilter = this.state.filter.toLowerCase();
+    const visibleName = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+    console.log(visibleName);
     return (
       <div className={css.containerApp}>
         <p>Phonebook</p>
@@ -109,7 +113,6 @@ class App extends Component {
           <label id={this.name}>
             <p>Find contacts by name</p>
             <input
-              // value={this.findContactsByName=>()}
               value={this.state.filter}
               onChange={this.handleChange}
               type="text"
@@ -118,7 +121,7 @@ class App extends Component {
           </label>
 
           <ul>
-            {this.state.contacts.map(contact => (
+            {visibleName.map(contact => (
               <li key={contact.id}>
                 <span>{contact.name}</span>: <span>{contact.number}</span>
               </li>
