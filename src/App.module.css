@@ -1,0 +1,14 @@
+.containerApp {
+  display: block;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px;
+  border: 1px solid black;
+}
