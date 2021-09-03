@@ -1,50 +1,72 @@
 import { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import css from './App.module.css';
 
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     name: '',
+    number: '',
+    filter: '',
   };
 
   handleChange = event => {
-    const { name, value } = event.currentTarget;
+    const { name, number, filter, value } = event.currentTarget;
     this.setState({
       // name: = [event.currentTarget.name]:
       // [event.currentTarget.name]: event.currentTarget.value,
       [name]: value,
+      [number]: value,
+      [filter]: value,
     });
-    // console.log(event.currentTarget.value);
+    //   const visibleName = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase)
+    //   );
+    // console.log(visibleName);
+    console.log(event.currentTarget.value);
+  };
+
+  filter = () => {
+    const visibleName = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase),
+    );
+    console.log(visibleName);
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
     // console.log(this.state.name);
-    this.formSubmitHandler(this.state.name);
+    // this.formSubmitHandler(this.state.name,this.state.number);
+
+    this.formSubmitHandler(this.state);
     this.reset();
   };
 
   formSubmitHandler = data => {
-    // console.log(data);
-    const todoo = {
-      data,
+    console.log(data);
+    const todoData = {
+      name: data.name,
+      number: data.number,
+      id: uuidv4(),
     };
+    console.log(todoData);
+
     this.setState(prevState => ({
-      name: [todoo, ...prevState.name],
+      contacts: [todoData, ...prevState.contacts],
     }));
-    console.log(this.state);
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({
+      name: '',
+      number: '',
+      // filter: '',
+    });
   };
-
-  // addToodo = () => {
-  //   const todoo = {
-
-  //   }
-  // };
 
   render() {
     return (
@@ -52,7 +74,7 @@ class App extends Component {
         <p>Phonebook</p>
         <div>
           <form className={css.containerForm} onSubmit={this.handleSubmit}>
-            <label>
+            <label id={this.name}>
               <p>Name</p>
               <input
                 value={this.state.name}
@@ -64,14 +86,44 @@ class App extends Component {
                 required
               />
             </label>
+            <label id={this.name}>
+              <p>Number</p>
+              <input
+                value={this.state.number}
+                onChange={this.handleChange}
+                type="tel"
+                name="number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                required
+              />
+            </label>
+
             <button type="submit">Add contact</button>
           </form>
         </div>
 
         <div>
           <p>Contacts</p>
-          <p>{this.state.name}</p>
-          <ul></ul>
+
+          <label id={this.name}>
+            <p>Find contacts by name</p>
+            <input
+              // value={this.findContactsByName=>()}
+              value={this.state.filter}
+              onChange={this.handleChange}
+              type="text"
+              name="filter"
+            />
+          </label>
+
+          <ul>
+            {this.state.contacts.map(contact => (
+              <li key={contact.id}>
+                <span>{contact.name}</span>: <span>{contact.number}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );
