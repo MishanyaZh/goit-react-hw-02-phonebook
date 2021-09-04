@@ -2,6 +2,11 @@ import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import css from './App.module.css';
 
+import ContactForm from './ContactForm/ContactForm';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
+import SectionTitle from './SectionTitle/SectionTitle';
+
 class App extends Component {
   state = {
     contacts: [
@@ -10,49 +15,19 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
-  handleChange = event => {
-    const { name, number, filter, value } = event.currentTarget;
-    this.setState({
-      // name: = [event.currentTarget.name]:
-      // [event.currentTarget.name]: event.currentTarget.value,
-      [name]: value,
-      [number]: value,
-      [filter]: value,
-    });
-    console.log(event.currentTarget.value);
-  };
-
-  // filterInput = (event) => {
-  //   const { filter, value } = event.currentTarget;
-  //   this.setState({
-  //     [filter]: value,
-  //   });
-  //   const visibleName = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase)
-  //   );
-  //   console.log(visibleName);
-  // };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    // console.log(this.state.name);
-    // this.formSubmitHandler(this.state.name,this.state.number);
-    this.formSubmitHandler(this.state);
-    this.reset();
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value });
   };
 
   formSubmitHandler = data => {
-    console.log(data);
     const todoData = {
       name: data.name,
       number: data.number,
       id: uuidv4(),
     };
-    console.log(todoData);
 
     this.setState(prevState => ({
       contacts: [todoData, ...prevState.contacts],
@@ -63,70 +38,55 @@ class App extends Component {
     this.setState({
       name: '',
       number: '',
-      // filter: '',
     });
   };
 
-  render() {
-    const normalizedFilter = this.state.filter.toLowerCase();
-    const visibleName = this.state.contacts.filter(contact =>
+  // if i have this name, I dont update state
+  getUnicName = data => {
+    const { contacts } = this.state;
+    const isName = contacts.find(contact =>
+      contact.name.toLowerCase().includes(data.name.toLowerCase()),
+    );
+
+    if (isName && isName.name.length === data.name.length) {
+      alert(`${data.name} is already in contacts`);
+      return;
+    } else {
+      this.formSubmitHandler(data);
+    }
+  };
+  // finnd contact to includ word with filter
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
-    console.log(visibleName);
+  };
+  // this for me, I dont understant patern and I nead coment...
+  // const normalizedFilter = this.state.filter.toLowerCase();
+  //   const visibleName = this.state.contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(normalizedFilter),
+  //   );
+
+  render() {
+    const visibleName = this.getVisibleContacts();
+    // console.log(visibleName);
     return (
       <div className={css.containerApp}>
-        <p>Phonebook</p>
+        {/* <h1>Phonebook</h1> */}
+        <SectionTitle title="Phonebook" />
+        <ContactForm
+          // onFormSubmitHandler={this.formSubmitHandler}
+          onGetUnicName={this.getUnicName}
+          onChange={this.handleChange}
+        />
+
+        {/* <h2>Contacts</h2> */}
+        <SectionTitle title="Contacts" />
         <div>
-          <form className={css.containerForm} onSubmit={this.handleSubmit}>
-            <label id={this.name}>
-              <p>Name</p>
-              <input
-                value={this.state.name}
-                onChange={this.handleChange}
-                type="text"
-                name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-                required
-              />
-            </label>
-            <label id={this.name}>
-              <p>Number</p>
-              <input
-                value={this.state.number}
-                onChange={this.handleChange}
-                type="tel"
-                name="number"
-                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-                required
-              />
-            </label>
-
-            <button type="submit">Add contact</button>
-          </form>
-        </div>
-
-        <div>
-          <p>Contacts</p>
-
-          <label id={this.name}>
-            <p>Find contacts by name</p>
-            <input
-              value={this.state.filter}
-              onChange={this.handleChange}
-              type="text"
-              name="filter"
-            />
-          </label>
-
-          <ul>
-            {visibleName.map(contact => (
-              <li key={contact.id}>
-                <span>{contact.name}</span>: <span>{contact.number}</span>
-              </li>
-            ))}
-          </ul>
+          <Filter onChange={this.changeFilter} value={this.state.filter} />
+          <ContactList contacts={visibleName} />
         </div>
       </div>
     );
