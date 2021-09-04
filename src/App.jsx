@@ -55,6 +55,13 @@ class App extends Component {
       this.formSubmitHandler(data);
     }
   };
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   // finnd contact to includ word with filter
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
@@ -63,7 +70,7 @@ class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
-  // this for me, I dont understant patern and I nead coment...
+  // this for me... I dont understant patern and I nead coment...
   // const normalizedFilter = this.state.filter.toLowerCase();
   //   const visibleName = this.state.contacts.filter(contact =>
   //     contact.name.toLowerCase().includes(normalizedFilter),
@@ -86,7 +93,10 @@ class App extends Component {
         <SectionTitle title="Contacts" />
         <div>
           <Filter onChange={this.changeFilter} value={this.state.filter} />
-          <ContactList contacts={visibleName} />
+          <ContactList
+            contacts={visibleName}
+            onDeleteContact={this.deleteContact}
+          />
         </div>
       </div>
     );
