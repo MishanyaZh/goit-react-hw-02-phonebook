@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import css from './App.module.css';
+// import css from './App.module.css';
 
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import SectionTitle from './SectionTitle/SectionTitle';
+import Section from './Section&Title&Container/Section';
+import Container from './Section&Title&Container/MainContainer';
 
 class App extends Component {
   state = {
@@ -78,27 +79,23 @@ class App extends Component {
 
   render() {
     const visibleName = this.getVisibleContacts();
-    // console.log(visibleName);
     return (
-      <div className={css.containerApp}>
-        {/* <h1>Phonebook</h1> */}
-        <SectionTitle title="Phonebook" />
-        <ContactForm
-          // onFormSubmitHandler={this.formSubmitHandler}
-          onGetUnicName={this.getUnicName}
-          onChange={this.handleChange}
-        />
+      <Container title="Phonebook">
+        <Section>
+          <ContactForm
+            onGetUnicName={this.getUnicName}
+            onChange={this.handleChange}
+          />
+        </Section>
 
-        {/* <h2>Contacts</h2> */}
-        <SectionTitle title="Contacts" />
-        <div>
+        <Section title="Contacts">
           <Filter onChange={this.changeFilter} value={this.state.filter} />
           <ContactList
             contacts={visibleName}
             onDeleteContact={this.deleteContact}
           />
-        </div>
-      </div>
+        </Section>
+      </Container>
     );
   }
 }
