@@ -42,6 +42,7 @@ class ContactForm extends Component {
         <label id={this.name}>
           <p className={css.formNameNumber}>Name</p>
           <input
+            className={css.input}
             value={this.state.name}
             onChange={this.handleChange}
             type="text"
@@ -55,6 +56,7 @@ class ContactForm extends Component {
         <label id={this.name}>
           <p className={css.formNameNumber}>Number</p>
           <input
+            className={css.input}
             value={this.state.number}
             onChange={this.handleChange}
             type="tel"

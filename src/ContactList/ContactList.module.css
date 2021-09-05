@@ -5,6 +5,7 @@
   margin-bottom: 10px;
   padding: 5px;
   border: 1px solid firebrick;
+  box-shadow: 1px 1px 13px 0px black;
   border-radius: 5px;
 }
 
@@ -18,17 +19,25 @@
 }
 
 .listButton {
-  width: 50px;
-  height: 25px;
+  width: 60px;
+  height: 30px;
 
   /* margin-top: 10px; */
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
 
   border-radius: 5px;
-  transition-duration: 0.1s;
-  box-shadow: 1px 1px 11px 1px #797a7c;
+  /* transition-duration: 0.1s; */
+  box-shadow: inset 1px 1px 11px 1px #797a7c;
   cursor: pointer;
+}
+
+.listButton:hover {
+  transform: scale(1.1);
+  background: #aafcea;
+  color: #062afa;
+  box-shadow: 1px 1px 11px 1px #062afa;
+  transition-duration: 0.1s;
 }
 
 .listButton:active {

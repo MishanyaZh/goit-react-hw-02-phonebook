@@ -5,6 +5,7 @@ const Filter = ({ value, onChange }) => (
   <label id={{ value }} className={css.filter}>
     <p className={css.filterName}>Find contacts by name</p>
     <input
+      className={css.input}
       value={value}
       onChange={onChange}
       type="text"

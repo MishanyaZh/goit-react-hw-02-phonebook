@@ -6,5 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Subtitle = styled.h2`
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
 `;
