@@ -5,8 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+import SectionContacts from './Section&Title&Container/SectionContacts';
 import Section from './Section&Title&Container/Section';
-import Container from './Section&Title&Container/MainContainer';
+import MContainer from './Section&Title&Container/MainContainer';
 
 class App extends Component {
   state = {
@@ -80,7 +81,7 @@ class App extends Component {
   render() {
     const visibleName = this.getVisibleContacts();
     return (
-      <Container title="Phonebook">
+      <MContainer title="Phonebook">
         <Section>
           <ContactForm
             onGetUnicName={this.getUnicName}
@@ -88,14 +89,14 @@ class App extends Component {
           />
         </Section>
 
-        <Section title="Contacts">
+        <SectionContacts title="Contacts">
           <Filter onChange={this.changeFilter} value={this.state.filter} />
           <ContactList
             contacts={visibleName}
             onDeleteContact={this.deleteContact}
           />
-        </Section>
-      </Container>
+        </SectionContacts>
+      </MContainer>
     );
   }
 }

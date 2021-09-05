@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 5px;
-  border: 1px solid black;
+  background: rgb(199 177 177);
+  border-radius: 5px;
+`;
+
+export const Subtitle = styled.h2`
+  text-align: center;
 `;

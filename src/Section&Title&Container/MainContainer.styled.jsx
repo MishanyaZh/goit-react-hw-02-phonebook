@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 
 export const MainContainer = styled.div`
   display: block;
-  width: 300px;
-  margin: 10px;
+  max-width: 320px;
+  min-width: 310px;
+
   padding: 10px;
   border: 1px solid black;
   border-radius: 5px;
