@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 
-import { MainContainer, Title } from './MainContainer.styled';
+import { MainContainer, Title, BoxMainContainer } from './MainContainer.styled';
 
 const MContainer = ({ children, title }) => (
-  <MainContainer>
-    <Title>{title}</Title>
-    {children}
-  </MainContainer>
+  <BoxMainContainer>
+    <MainContainer>
+      <Title>{title}</Title>
+      {children}
+    </MainContainer>
+  </BoxMainContainer>
 );
 
 export default MContainer;
