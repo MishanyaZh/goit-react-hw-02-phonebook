@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Container, Subtitle } from './Section.styled';
+import { Container, Subtitle } from '../Section/Section.styled';
 
 const SectionContacts = ({ title, children }) => (
   <Container>

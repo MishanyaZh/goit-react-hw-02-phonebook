@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import SectionContacts from './Section&Title&Container/SectionContacts';
-import Section from './Section&Title&Container/Section';
-import MContainer from './Section&Title&Container/MainContainer';
+import SectionContacts from './Section&Title&Container/SectionContacts/SectionContacts';
+import Section from './Section&Title&Container/Section/Section';
+import MContainer from './Section&Title&Container/MainContainer/MainContainer';
 
 class App extends Component {
   state = {

@@ -7,6 +7,7 @@
   border: 1px solid firebrick;
   box-shadow: 1px 1px 13px 0px black;
   border-radius: 5px;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .contactsList {
@@ -27,7 +28,7 @@
   font-weight: 500;
 
   border-radius: 5px;
-  /* transition-duration: 0.1s; */
+  transition-duration: 0.1s;
   box-shadow: inset 1px 1px 11px 1px #797a7c;
   cursor: pointer;
 }
@@ -37,7 +38,7 @@
   background: #aafcea;
   color: #062afa;
   box-shadow: 1px 1px 11px 1px #062afa;
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
 }
 
 .listButton:active {
