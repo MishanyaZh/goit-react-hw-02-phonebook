@@ -5,6 +5,9 @@ export const MainContainer = styled.div`
 
   max-width: 400px;
   min-width: 310px;
+
+  margin: 0 auto;
+
   padding: 10px;
 
   border: 1px solid black;
@@ -16,17 +19,4 @@ export const MainContainer = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-`;
-
-export const BoxMainContainer = styled.div`
-  display: flex;
-  justify-content: center;
-
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  border: 1px solid black;
-  border-radius: 5px;
-
-  background: rgb(241, 235, 227);
 `;

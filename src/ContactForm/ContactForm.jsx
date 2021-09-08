@@ -9,27 +9,19 @@ class ContactForm extends Component {
   };
 
   handleChange = event => {
-    const { name, number, value } = event.currentTarget;
+    const { name, value } = event.currentTarget;
     this.setState({
-      // name: = [event.currentTarget.name]:
-      // [event.currentTarget.name]: event.currentTarget.value,
       [name]: value,
-      [number]: value,
     });
-    // console.log(event.currentTarget.value);
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.name);
-    // this.formSubmitHandler(this.state.name,this.state.number);
-    this.props.onGetUnicName(this.state);
-    // old code
-    // this.props.onFormSubmitHandler(this.state);
-    this.reset();
+    this.props.formSubmitHandler(this.state);
+    this.resetState();
   };
 
-  reset = () => {
+  resetState = () => {
     this.setState({
       name: '',
       number: '',
@@ -79,6 +71,6 @@ class ContactForm extends Component {
 export default ContactForm;
 
 ContactForm.propTypes = {
-  getUnicName: PropTypes.string,
+  formSubmitHandler: PropTypes.func,
   handleChange: PropTypes.string,
 };

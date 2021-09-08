@@ -3,7 +3,7 @@ import { Container, Subtitle } from '../Section/Section.styled';
 
 const SectionContacts = ({ title, children }) => (
   <Container>
-    <Subtitle>{title}</Subtitle>
+    {title && <Subtitle>{title}</Subtitle>}
     {children}
   </Container>
 );
