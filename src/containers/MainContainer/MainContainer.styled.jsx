@@ -4,7 +4,7 @@ export const MainContainer = styled.div`
   display: block;
 
   max-width: 400px;
-  min-width: 310px;
+  min-width: 290px;
 
   margin: 0 auto;
 
